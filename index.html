@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Once Gown Admin | لوحة تحكم الإدارة الفاخرة</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- 1. LOGIN SCREEN -->
+  <div class="login-wrapper" id="loginWrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo-frame">
+          <img src="assets/logo.jpg" alt="شعار Once Gown" class="login-logo-img" />
+        </div>
+        <h1 class="login-title brand-title">Once Gown Admin</h1>
+        <p class="login-subtitle">تسجيل الدخول إلى لوحة التحكم والإدارة</p>
+      </div>
+
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label class="form-label" for="adminEmail">البريد الإلكتروني للإدمن</label>
+          <input type="email" id="adminEmail" class="form-input" value="admin@oncegown.com" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="adminPassword">كلمة المرور</label>
+          <input type="password" id="adminPassword" class="form-input" value="OnceGownAdmin2026!" required />
+        </div>
+
+        <div id="loginError" class="hidden" style="color: var(--status-rejected); font-size: 0.85rem; margin-bottom: 16px;"></div>
+
+        <button type="submit" class="btn-luxury btn-primary-gold">تسجيل الدخول ✨</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. DASHBOARD MAIN VIEW (Shown when authenticated) -->
+  <div class="dashboard-wrapper hidden" id="dashboardWrapper">
+
+    <!-- Admin Navigation Bar -->
+    <header class="admin-navbar">
+      <div class="admin-brand">
+        <div class="admin-logo-frame">
+          <img src="assets/logo.jpg" alt="شعار Once Gown" class="login-logo-img" />
+        </div>
+        <div>
+          <h2 style="font-size: 1.15rem; font-weight: 600;" class="brand-title">Once Gown Admin</h2>
+          <span style="font-size: 0.75rem; color: var(--gold-dark);">لوحة مراجعة الفساتين وإدارتها</span>
+        </div>
+      </div>
+
+      <button type="button" class="btn-logout" id="btnLogout">تسجيل الخروج</button>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="dashboard-container">
+
+      <!-- Metrics Stat Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <span>إجمالي الفساتين</span>
+            <div class="stat-icon" style="background: rgba(197, 155, 39, 0.1); color: var(--gold-dark);">👗</div>
+          </div>
+          <div class="stat-value" id="statTotal">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span>قيد المراجعة</span>
+            <div class="stat-icon" style="background: #FFFDF0; color: var(--gold-primary);">⏳</div>
+          </div>
+          <div class="stat-value" id="statPending">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span>مقبولة ومرفوعة</span>
+            <div class="stat-icon" style="background: var(--status-approved-bg); color: var(--status-approved);">✨</div>
+          </div>
+          <div class="stat-value" id="statApproved">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span>مرفوضة</span>
+            <div class="stat-icon" style="background: var(--status-rejected-bg); color: var(--status-rejected);">❌</div>
+          </div>
+          <div class="stat-value" id="statRejected">0</div>
+        </div>
+      </div>
+
+      <!-- Search & Filters Toolbar -->
+      <div class="toolbar-card">
+        <div class="search-box">
+          <input type="text" id="searchInput" class="form-input" placeholder="ابحث باسم المالكة، الواتساب، المحافظة، أو نوع الفستان..." />
+        </div>
+
+        <div class="filter-chips">
+          <button type="button" class="filter-chip active" data-filter="all">الكل</button>
+          <button type="button" class="filter-chip" data-filter="pending_review">قيد المراجعة ⏳</button>
+          <button type="button" class="filter-chip" data-filter="approved">المقبولة ✨</button>
+          <button type="button" class="filter-chip" data-filter="rejected">المرفوضة ❌</button>
+        </div>
+      </div>
+
+      <!-- Dresses Submissions Grid -->
+      <div class="dresses-grid" id="dressesGrid"></div>
+
+    </main>
+
+  </div>
+
+  <!-- Detailed Preview Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="btnCloseModal">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- Firebase Compat SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+  <!-- Admin Scripts -->
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
