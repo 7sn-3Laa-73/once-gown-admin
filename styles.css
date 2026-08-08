@@ -774,3 +774,8 @@ h1, h2, h3, h4, .brand-title {
     align-items: flex-start;
   }
 }
+
+/* Rejection Modal Layer Stack */
+#rejectionModalOverlay {
+  z-index: 100000;
+}
