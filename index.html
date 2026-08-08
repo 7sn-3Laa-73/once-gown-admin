@@ -2,37 +2,38 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Once Gown Admin | لوحة تحكم الإدارة الفاخرة</title>
+  <meta name="description" content="Once Gown Luxury Haute Couture Review & Management Dashboard" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- 1. LOGIN SCREEN -->
+  <!-- 1. LOGIN SCREEN OVERLAY -->
   <div class="login-wrapper" id="loginWrapper">
     <div class="login-card">
       <div class="login-header">
         <div class="login-logo-frame">
           <img src="assets/logo.jpg" alt="شعار Once Gown" class="login-logo-img" />
         </div>
-        <h1 class="login-title brand-title">Once Gown Admin</h1>
-        <p class="login-subtitle">تسجيل الدخول إلى لوحة التحكم والإدارة</p>
+        <h1 class="login-title brand-title" data-i18n="admin.loginTitle">Once Gown Admin</h1>
+        <p class="login-subtitle" data-i18n="admin.loginSubtitle">تسجيل الدخول إلى لوحة التحكم والإدارة</p>
       </div>
 
       <form id="adminLoginForm">
         <div class="form-group">
-          <label class="form-label" for="adminEmail">البريد الإلكتروني للإدمن</label>
+          <label class="form-label" for="adminEmail" data-i18n="admin.emailLabel">البريد الإلكتروني للإدمن</label>
           <input type="email" id="adminEmail" class="form-input" value="admin@oncegown.com" required />
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="adminPassword">كلمة المرور</label>
+          <label class="form-label" for="adminPassword" data-i18n="admin.passwordLabel">كلمة المرور</label>
           <input type="password" id="adminPassword" class="form-input" value="OnceGownAdmin2026!" required />
         </div>
 
         <div id="loginError" class="hidden" style="color: var(--status-rejected); font-size: 0.85rem; margin-bottom: 16px;"></div>
 
-        <button type="submit" class="btn-luxury btn-primary-gold">تسجيل الدخول ✨</button>
+        <button type="submit" class="btn-luxury btn-primary-gold" data-i18n="admin.loginBtn">تسجيل الدخول ✨</button>
       </form>
     </div>
   </div>
@@ -47,12 +48,22 @@
           <img src="assets/logo.jpg" alt="شعار Once Gown" class="login-logo-img" />
         </div>
         <div>
-          <h2 style="font-size: 1.15rem; font-weight: 600;" class="brand-title">Once Gown Admin</h2>
-          <span style="font-size: 0.75rem; color: var(--gold-dark);">لوحة مراجعة الفساتين وإدارتها</span>
+          <h2 style="font-size: 1.25rem; font-weight: 700;" class="brand-title" data-i18n="admin.title">Once Gown Admin</h2>
+          <span style="font-size: 0.78rem; color: var(--gold-dark); font-weight: 500;" data-i18n="admin.subtitle">لوحة مراجعة الفساتين وإدارتها الفاخرة</span>
         </div>
       </div>
 
-      <button type="button" class="btn-logout" id="btnLogout">تسجيل الخروج</button>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <!-- Admin Language Switcher Button -->
+        <button type="button" class="lang-switch-btn" id="adminLangSwitchBtn" aria-label="Switch Language">
+          <span class="lang-option active-lang" data-lang="ar">العربية</span>
+          <span class="lang-sep">|</span>
+          <span class="lang-option" data-lang="en">EN</span>
+        </button>
+
+        <!-- Logout Button -->
+        <button type="button" class="btn-logout" id="btnLogout" data-i18n="admin.logoutBtn">تسجيل الخروج</button>
+      </div>
     </header>
 
     <!-- Main Content Container -->
@@ -62,7 +73,7 @@
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-header">
-            <span>إجمالي الفساتين</span>
+            <span data-i18n="stat.total">إجمالي الفساتين</span>
             <div class="stat-icon" style="background: rgba(197, 155, 39, 0.1); color: var(--gold-dark);">👗</div>
           </div>
           <div class="stat-value" id="statTotal">0</div>
@@ -70,7 +81,7 @@
 
         <div class="stat-card">
           <div class="stat-header">
-            <span>قيد المراجعة</span>
+            <span data-i18n="stat.pending">قيد المراجعة</span>
             <div class="stat-icon" style="background: #FFFDF0; color: var(--gold-primary);">⏳</div>
           </div>
           <div class="stat-value" id="statPending">0</div>
@@ -78,7 +89,7 @@
 
         <div class="stat-card">
           <div class="stat-header">
-            <span>مقبولة ومرفوعة</span>
+            <span data-i18n="stat.approved">مقبولة ومرفوعة</span>
             <div class="stat-icon" style="background: var(--status-approved-bg); color: var(--status-approved);">✨</div>
           </div>
           <div class="stat-value" id="statApproved">0</div>
@@ -86,7 +97,7 @@
 
         <div class="stat-card">
           <div class="stat-header">
-            <span>مرفوضة</span>
+            <span data-i18n="stat.rejected">مرفوضة</span>
             <div class="stat-icon" style="background: var(--status-rejected-bg); color: var(--status-rejected);">❌</div>
           </div>
           <div class="stat-value" id="statRejected">0</div>
@@ -96,14 +107,14 @@
       <!-- Search & Filters Toolbar -->
       <div class="toolbar-card">
         <div class="search-box">
-          <input type="text" id="searchInput" class="form-input" placeholder="ابحث باسم المالكة، الواتساب، المحافظة، أو نوع الفستان..." />
+          <input type="text" id="searchInput" class="form-input" data-i18n-placeholder="toolbar.searchPlaceholder" placeholder="ابحث باسم المالكة، الواتساب، المحافظة، الماركة، اللون، أو المقاس..." />
         </div>
 
         <div class="filter-chips">
-          <button type="button" class="filter-chip active" data-filter="all">الكل</button>
-          <button type="button" class="filter-chip" data-filter="pending_review">قيد المراجعة ⏳</button>
-          <button type="button" class="filter-chip" data-filter="approved">المقبولة ✨</button>
-          <button type="button" class="filter-chip" data-filter="rejected">المرفوضة ❌</button>
+          <button type="button" class="filter-chip active" data-filter="all" data-i18n="filter.all">الكل</button>
+          <button type="button" class="filter-chip" data-filter="pending_review" data-i18n="filter.pending">قيد المراجعة ⏳</button>
+          <button type="button" class="filter-chip" data-filter="approved" data-i18n="filter.approved">المقبولة ✨</button>
+          <button type="button" class="filter-chip" data-filter="rejected" data-i18n="filter.rejected">المرفوضة ❌</button>
         </div>
       </div>
 
@@ -121,6 +132,26 @@
       <div id="modalContent"></div>
     </div>
   </div>
+
+  <!-- Rejection Reason Prompt Modal -->
+  <div class="modal-overlay" id="rejectionModalOverlay">
+    <div class="modal-card" style="max-width: 500px;">
+      <button type="button" class="modal-close-btn" id="btnCloseRejectionModal">✕</button>
+      <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--status-rejected); margin-bottom: 10px;" data-i18n="modal.rejectPromptTitle">توضيح سبب عدم القبول</h2>
+      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 16px;" data-i18n="modal.rejectPromptDesc">اكتبي سبب عدم قبول هذا الطلب ليظهر لصاحبة الفستان عند متابعة الرابط الخاص بها:</p>
+      
+      <div class="form-group">
+        <textarea id="rejectionReasonInput" class="form-input" style="min-height: 100px; resize: vertical;" data-i18n-placeholder="modal.rejectPlaceholder" placeholder="مثال: الصور غير واضحة، يرجى إعادة الرفع بصور أكثر إضاءة..."></textarea>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px;">
+        <button type="button" class="btn-sm btn-reject" id="btnConfirmRejectionSubmit" style="padding: 10px 20px; font-size: 0.9rem;" data-i18n="modal.confirmRejectBtn">تأكيد عدم القبول ❌</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Bilingual Copywriting Service -->
+  <script src="i18n.js"></script>
 
   <!-- Firebase Compat SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
