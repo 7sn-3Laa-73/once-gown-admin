@@ -559,7 +559,43 @@ h1, h2, h3, h4, .brand-title {
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--gold-dark);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
+}
+
+/* Card Bottom Status Banner Box */
+.card-status-box {
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.card-status-pending {
+  background: #FFFDF0;
+  border: 1px solid rgba(197, 155, 39, 0.35);
+  color: var(--gold-dark);
+}
+
+.card-status-approved {
+  background: var(--status-approved-bg);
+  border: 1px solid rgba(39, 174, 96, 0.35);
+  color: var(--status-approved);
+}
+
+.card-status-rejected {
+  background: var(--status-rejected-bg);
+  border: 1px solid rgba(231, 76, 60, 0.35);
+  color: var(--status-rejected);
+}
+
+.card-rejection-reason-text {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(231, 76, 60, 0.2);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #2B181B;
 }
 
 .dress-footer-actions {
@@ -596,9 +632,12 @@ h1, h2, h3, h4, .brand-title {
   border: 1px solid rgba(39, 174, 96, 0.3);
 }
 
-.btn-approve:hover {
+.btn-approve:hover,
+.btn-approve.active-status {
   background: var(--status-approved);
   color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
 }
 
 .btn-reject {
@@ -607,9 +646,12 @@ h1, h2, h3, h4, .brand-title {
   border: 1px solid rgba(231, 76, 60, 0.3);
 }
 
-.btn-reject:hover {
+.btn-reject:hover,
+.btn-reject.active-status {
   background: var(--status-rejected);
   color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
 }
 
 /* =============================================================

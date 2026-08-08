@@ -233,13 +233,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const status = dress.status || 'pending_review';
       let statusText = adminI18n.t('status.pending');
       let badgeClass = 'badge-pending';
+      let cardStatusBoxClass = 'card-status-pending';
 
       if (status === 'approved') {
         statusText = adminI18n.t('status.approved');
         badgeClass = 'badge-approved';
+        cardStatusBoxClass = 'card-status-approved';
       } else if (status === 'rejected') {
         statusText = adminI18n.t('status.rejected');
         badgeClass = 'badge-rejected';
+        cardStatusBoxClass = 'card-status-rejected';
       }
 
       const listingTypeStr = dress.listingType || (adminI18n.lang === 'ar' ? 'للإيجار والبيع' : 'Rent & Sale');
@@ -273,10 +276,27 @@ document.addEventListener('DOMContentLoaded', () => {
             ${dress.sellPrice ? `${dress.sellPrice.toLocaleString()} ${adminI18n.t('modal.currency')} (${adminI18n.lang === 'ar' ? 'بيع' : 'Sale'})` : (!dress.rentPrice ? (adminI18n.lang === 'ar' ? 'السعر غير محدد' : 'Price not set') : '')}
           </div>
 
+          <!-- Bottom Card Status Banner & Rejection Reason Notice -->
+          <div class="card-status-box ${cardStatusBoxClass}">
+            <div style="display: flex; align-items: center; justify-content: space-between; font-weight: 700;">
+              <span>${adminI18n.t('card.currentStatus')}</span>
+              <span>${statusText}</span>
+            </div>
+            ${(status === 'rejected' && dress.rejectionReason) ? `
+              <div class="card-rejection-reason-text">
+                <strong>❌ ${adminI18n.t('modal.rejectionReasonLabel')}</strong> ${dress.rejectionReason}
+              </div>
+            ` : ''}
+          </div>
+
           <div class="dress-footer-actions">
             <button type="button" class="btn-sm btn-view btn-details" data-id="${dress.id}">${adminI18n.t('card.detailsBtn')}</button>
-            <button type="button" class="btn-sm btn-approve btn-change-status" data-id="${dress.id}" data-status="approved">${adminI18n.t('card.approveBtn')}</button>
-            <button type="button" class="btn-sm btn-reject btn-change-status" data-id="${dress.id}" data-status="rejected">${adminI18n.t('card.rejectBtn')}</button>
+            <button type="button" class="btn-sm btn-approve btn-change-status ${status === 'approved' ? 'active-status' : ''}" data-id="${dress.id}" data-status="approved">
+              ${status === 'approved' ? '✓ ' : ''}${adminI18n.t('card.approveBtn')}
+            </button>
+            <button type="button" class="btn-sm btn-reject btn-change-status ${status === 'rejected' ? 'active-status' : ''}" data-id="${dress.id}" data-status="rejected">
+              ${status === 'rejected' ? '✓ ' : ''}${adminI18n.t('card.rejectBtn')}
+            </button>
           </div>
         </div>
       `;
