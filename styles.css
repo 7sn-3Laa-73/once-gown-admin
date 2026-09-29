@@ -821,3 +821,12 @@ h1, h2, h3, h4, .brand-title {
 #rejectionModalOverlay {
   z-index: 100000;
 }
+
+/* ---------- Buyer Interest Poll Results ---------- */
+.poll-results-card { margin-bottom: 24px; }
+.poll-results-total { font-size: .85rem; color: var(--text-muted); }
+.poll-row { margin-top: 14px; }
+.poll-row-head { display: flex; justify-content: space-between; font-size: .92rem; margin-bottom: 6px; color: var(--text-primary); }
+.poll-row-head strong { color: var(--rose-deep); }
+.poll-bar { height: 10px; background: var(--rose-light); border-radius: 999px; overflow: hidden; }
+.poll-bar-fill { height: 100%; background: linear-gradient(90deg, var(--rose-primary), var(--gold-dark)); border-radius: 999px; transition: width .5s ease; }

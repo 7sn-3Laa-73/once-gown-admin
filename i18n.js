@@ -22,6 +22,15 @@ const adminTranslations = {
     "stat.approved": "Approved & Featured",
     "stat.rejected": "Rejected",
 
+    // Buyer Interest Poll
+    "poll.title": "What are buyers looking for?",
+    "poll.evening": "Evening gown",
+    "poll.guest": "Wedding guest gown",
+    "poll.engagement": "Engagement gown",
+    "poll.bridal": "Bridal gown",
+    "poll.gala": "Gala / formal gown",
+    "poll.total": "total votes",
+
     // Search & Filter Toolbar
     "toolbar.searchPlaceholder": "Search by owner name, WhatsApp, governorate, brand, color, or size...",
     "filter.all": "All Submissions",
@@ -96,6 +105,15 @@ const adminTranslations = {
     "stat.pending": "قيد المراجعة",
     "stat.approved": "مقبولة ومرفوعة",
     "stat.rejected": "مرفوضة",
+
+    // Buyer Interest Poll
+    "poll.title": "عن ماذا تبحث العميلات؟",
+    "poll.evening": "فستان سهرة",
+    "poll.guest": "فستان حضور زفاف",
+    "poll.engagement": "فستان خطوبة",
+    "poll.bridal": "فستان زفاف",
+    "poll.gala": "فستان حفلات رسمية",
+    "poll.total": "إجمالي الأصوات",
 
     // Search & Filter Toolbar
     "toolbar.searchPlaceholder": "ابحث باسم المالكة، الواتساب، المحافظة، الماركة، اللون، أو المقاس...",

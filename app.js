@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let allDresses = [];
   let currentFilter = 'all';
   let searchQuery = '';
+  const POLL_KEYS = ['evening', 'guest', 'engagement', 'bridal', 'gala'];
+  let pollCounts = {};
 
   // DOM Elements
   const elLoginWrapper = document.getElementById('loginWrapper');
@@ -62,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     adminI18n.setLanguage(adminI18n.lang);
 
     window.addEventListener('adminLanguageChanged', () => {
+      renderPollResults();
       renderDressesGrid();
     });
   }
@@ -120,11 +123,41 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Real-Time Firestore Synchronization
   // -------------------------------------------------------------
 
+  function renderPollResults() {
+    const elList = document.getElementById('pollResultsList');
+    const elTotal = document.getElementById('pollResultsTotal');
+    if (!elList) return;
+    const total = POLL_KEYS.reduce((s, k) => s + (pollCounts[k] || 0), 0);
+    elList.innerHTML = POLL_KEYS.map(k => {
+      const count = pollCounts[k] || 0;
+      const pct = total ? Math.round((count / total) * 100) : 0;
+      return `<div class="poll-row">
+        <div class="poll-row-head"><span>${adminI18n.t('poll.' + k)}</span><strong>${count} · ${pct}%</strong></div>
+        <div class="poll-bar"><div class="poll-bar-fill" style="width:${pct}%"></div></div>
+      </div>`;
+    }).join('');
+    if (elTotal) elTotal.textContent = `${total} ${adminI18n.t('poll.total')}`;
+  }
+
+  function startPollListener() {
+    renderPollResults();
+    db.collection('polls').doc('gownInterest').onSnapshot(snap => {
+      pollCounts = snap.exists ? snap.data() : {};
+      renderPollResults();
+    }, err => {
+      console.warn('Poll read error:', err.message);
+      const elTotal = document.getElementById('pollResultsTotal');
+      if (elTotal) elTotal.textContent = '⚠️ ' + err.message;
+    });
+  }
+
   function startFirestoreListener() {
     if (typeof db === 'undefined' || !db) {
       console.warn('Firestore instance not available yet.');
       return;
     }
+
+    startPollListener();
 
     db.collection('dresses').onSnapshot((snapshot) => {
       allDresses = [];
